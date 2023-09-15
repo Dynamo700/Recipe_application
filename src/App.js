@@ -1,14 +1,23 @@
+
 import logo from './logo.svg';
 import './App.css';
 
-
-function App() {
-  return (
-    <div className="App">
-      <h1>Hello</h1>
+export function View() {
+  return(
+    <div>
+      <h1>Recipe viewer</h1>
     </div>
   );
 }
 
+export function Add() {
+  return (
+    <div>
+      <h1>Add</h1>
+    </div>
+  )
+}
 
-export default App;
+export function App() {
+  return <View />;
+}
