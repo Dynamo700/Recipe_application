@@ -1,6 +1,7 @@
 import './App.css';
 import { Link } from "react-router-dom";
 import { useState, useEffect } from 'react';
+import { RecipeList } from './recipes';
 
 export function View() {
 
@@ -25,17 +26,14 @@ export function View() {
 
 
   return(
-    recipes.map( (recipes, i)=> {
-      return (<div>
-      <h3>{recipes.name}</h3>
-      <h3>{recipes.ingreidents}</h3>
-      <h3>{recipes.directions}</h3>
-      <h3>{recipes.description}</h3>
-      <img height={300} src={recipes.image} />
-      </div>
-      )
-     
-    })
+    <div>
+      <nav>
+        <Link to="/">View</Link>
+        <Link to="/add">Add</Link>
+      </nav>
+      <h1>View Recipes</h1>
+      <RecipeList Recipes={recipes}/>
+    </div>
   )
 }
 
