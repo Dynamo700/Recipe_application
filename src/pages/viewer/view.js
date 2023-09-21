@@ -4,54 +4,24 @@ import { RecipeList } from "../recipes/recipes";
 
 
     export function View() {
+      const [recipes, setRecipes] = useState(null);
 
+      useEffect(() =>{
 
-        const [recipes, setRecipes] = useState(
-         
-          [ {"name": "pizza", 
-          "ingreidents": "cheese, dough, pizza sauce, pepperoni", 
-          "directions": "cook at 350", 
-          "description": "round",
-          "image": "./images/pizza.jpeg"},
-          {"name": "cupcake", 
-          "ingreidents": "flour, sugar, egg, water ", 
-          "directions": "cook at 400", 
-          "description": "cupcake",
-          "image": "./images/cupcake.jpg"}]
-      
-        );
+        const recipesData = localStorage.getItem('recipesData');
 
-    useEffect( () => {
-        loadRecipes()
-    }, [])
+        if(recipesData){
+          setRecipes(JSON.parse(recipesData))
+        }
 
-    const loadRecipes = () => {
-        fetch("./recipes.json",
-        {
-            headers: {
-                'Content-Type': 'Application/json',
+      }, [])
 
-                'Accept': 'application/json'
-            }
-        })
-        .then( function(response){
-            return response.json();
-        })
-        .then( function(recipes) {
-            console.log(recipes)
-        })
-        .then( setRecipes(recipes))
-        .catch( e => console.log(e.message));
-    }
-
-    if (recipes == null) {
-        return <div>Now loading....</div>
+    if (recipes === null) {
+      return <div>Now loading...</div>
     }
     
-
-
-
-
+    //select radio buttons for images
+    
   return(
     <div>
       <nav>
@@ -60,6 +30,8 @@ import { RecipeList } from "../recipes/recipes";
       </nav>
       <h1>View Recipes</h1>
       <RecipeList Recipes={recipes}/>
+
+      
     </div>
   )
 }

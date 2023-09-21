@@ -1,10 +1,18 @@
-[ {"name": "pizza", 
-"ingreidents": "cheese, dough, pizza sauce, pepperoni", 
-"directions": "cook at 350", 
-"description": "round",
-"image": "./images/pizza.jpeg"},
-{"name": "cupcake", 
-"ingreidents": "flour, sugar, egg, water ", 
-"directions": "cook at 400", 
-"description": "cupcake",
-"image": "./images/cupcake.jpg"}]
+[ 
+    {
+        "name": "pizza", 
+        "ingreidents": "cheese, dough, pizza sauce, pepperoni", 
+        "directions": "cook at 450", 
+        "description": "round",
+        "image": "./images/pizza.jpeg"
+    },
+
+    {
+        "name": "cupcake", 
+        "ingreidents": "flour, sugar, egg, water ", 
+        "directions": "cook at 400", 
+        "description": "short",
+        "image": "./images/cupcake.jpg"
+    }
+
+]
