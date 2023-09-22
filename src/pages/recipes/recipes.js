@@ -1,14 +1,20 @@
-export function RecipeList( {Recipes} ){
+export function RecipeList( {Recipes, RecipeDelete} ){
+
+    function removeFunction(i){
+        RecipeDelete(i);
+    }
+
     return (
         Recipes.map((recipe, i) => {
             console.log(recipe)
             return (
             <>
                 <Recipe recipeName={recipe.name} 
-                recipeIngredient={recipe.ingredient} 
+                recipeIngredient={recipe.ingredients} 
                 recipeDirections={recipe.directions} 
                 recipeDescription={recipe.description} 
-                recipeImage={recipe.image}/>
+                recipeImage={"images/"+recipe.image}/>
+                <button onClick={(e) => {removeFunction(i)}}>remove</button>
             </>
             )
             
