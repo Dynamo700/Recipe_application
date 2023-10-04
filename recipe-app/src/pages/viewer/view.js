@@ -1,22 +1,46 @@
 import { Link } from "react-router-dom";
 import { useState, useEffect, useRef } from 'react';
 import { RecipeList } from "../recipes/recipes";
+import axios from "axios";
+
 
 export function View() {
   const [recipes, setRecipes] = useState(null);
 
   useEffect(() =>{
-    const recipesData = localStorage.getItem('recipesData');
 
-    if(recipesData){
-      setRecipes(JSON.parse(recipesData))
-    }
 
+    const recipesDbData = load()
+
+    // const recipesData = localStorage.getItem('recipesData');
+    
+    // if(recipesData){
+    //   setRecipes(JSON.parse(recipesData))
+    // }
+    
+    
   }, [])
 
+  async function load(){
+    await axios.get('http://localhost:8000/recipes').then((response) =>{
+      //do whatever with that response
+      // console.log(response.data)
+
+      const recipesData = response.data
+      setRecipes(recipesData)
+
+    })
+  }
+
   function Remove(i){
-    console.log("removeFunction")
-    console.log(i)
+    const recipeName = recipes[i].name
+
+    console.log(recipeName)
+
+    axios.delete('http://localhost:8000/delete/'+recipeName).then((response) => {
+      console.log(response)
+    })
+    
 
     //update the state, and then update the local storage
     const updatedRecipes = [...recipes]
@@ -28,7 +52,7 @@ export function View() {
     setRecipes(updatedRecipes)
 
     //resetting the recipes in localstorage
-    localStorage.setItem('recipesData', JSON.stringify(updatedRecipes));
+    
 
   }
 

@@ -14,7 +14,7 @@ export function RecipeList( {Recipes, RecipeDelete} ){
                 recipeDirections={recipe.directions} 
                 recipeDescription={recipe.description} 
                 recipeImage={"images/"+recipe.image}/>
-                <button onClick={(e) => {removeFunction(i)}}>remove</button>
+                <button type="button" className="btn btn-primary" onClick={(e) => {removeFunction(i)}}>remove</button>
             </>
             )
             

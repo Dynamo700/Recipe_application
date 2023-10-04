@@ -1,6 +1,6 @@
 import { Link, Route, Routes, BrowserRouter } from "react-router-dom";
 import { useState, useEffect, useRef } from 'react';
-
+import axios from "axios";
 
 export function Add() {
     const [name, setName] = useState("");
@@ -15,17 +15,6 @@ export function Add() {
       image2: 'image2.jpg',
       image3: 'image3.jpg'
     };
-    
-
-    useEffect(() => {
-      
-      const recipesData = localStorage.getItem('recipesData');
-      
-      if(recipesData){
-        setData(JSON.parse(recipesData))
-      }
-
-    }, [])
 
     function handleNameInput(event){
       const value = event.target.value;
@@ -63,6 +52,12 @@ export function Add() {
         image: selectImageFileName
       }
 
+      axios.post('http://localhost:8000/add', recipe).then((response) => {
+        console.log(response)
+      })
+
+      
+
       console.log(recipe)
       const updatedData = [...data] //copied orginal state
 
@@ -71,7 +66,6 @@ export function Add() {
       setData(updatedData)
 
       console.log(updatedData)
-      localStorage.setItem('recipesData', JSON.stringify(updatedData));
 
       console.log(recipe)
 
@@ -86,18 +80,33 @@ export function Add() {
           <Link to="/">View</Link>
           <Link to="/add">Add</Link>
         </nav>
-        <h1>Add Recipe</h1>     
-          <label for="name">Name:</label>
-          <input type="text" value={name} onChange={handleNameInput}></input>
+        <h1>Add Recipe</h1>  
+
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="basic-addon1">Name:</span>
+          <input type="text" class="form-control" placeholder="Recipe Name" value={name} onChange={handleNameInput}/>
+         </div>
+
           <br></br>
-          <label for="ingreidents">ingreidents</label>
-          <input type="text" value={ingredients} onChange={handleIngreidentsInput}></input>
+
+          <div class="input-group mb-3">
+          <span class="input-group-text" id="basic-addon1">ingredients:</span>
+          <input type="text" class="form-control" placeholder="Recipe ingredients" value={ingredients} onChange={handleIngreidentsInput}/>
+         </div>
+
+          
           <br></br>
-          <label for="directions">directions</label>
-          <input type="text" value={directions} onChange={handleDirectionsInput}></input>
+          <div class="input-group mb-3">
+          <span class="input-group-text" id="basic-addon1">Directions:</span>
+          <input type="text" class="form-control" placeholder="Recipe directions" value={directions} onChange={handleDirectionsInput}/>
+         </div>
+          
           <br></br>
-          <label for="descriptions">descriptions</label>
-          <input type="text" value={description} onChange={handleDescriptionInput}></input>
+          <div class="input-group mb-3">
+          <span class="input-group-text" id="basic-addon1">Descriptions:</span>
+          <input type="text" class="form-control" placeholder="Recipe descriptions" value={description} onChange={handleDescriptionInput}/>
+         </div>
+          
           <br></br>
           <p>Please select an image</p>
           <img src="images/image1.jpg" width={300} height={300}></img>
@@ -114,9 +123,8 @@ export function Add() {
 
           <br></br>
           <br></br>
-          
-          <button onClick={handleSubmit}>Submit</button>
-          
+
+          <button type="button" className="btn btn-primary" onClick={handleSubmit}>Submit</button>
       </div>
           
       
